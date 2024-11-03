@@ -1,0 +1,91 @@
+/* Register.css */
+
+/* Background Animation */
+.register-animation {
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Form Animation */
+  .register-form-animation {
+    animation: slideUp 1.5s ease-in-out;
+  }
+  
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Bounce Animation for Heading */
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Button Hover Effect */
+  button:hover {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-3px);
+  }
+  
+  /* Additional Styling */
+  .bg-gradient-to-br {
+    background: linear-gradient(to bottom right, #edf2f7, #e2e8f0);
+  }
+  
+  .shadow-2xl {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Input Field Styling */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    border: 1px solid #cbd5e0; /* Gray border */
+    border-radius: 0.375rem; /* Rounded corners */
+    padding: 0.5rem 1rem; /* Padding */
+    width: 100%; /* Full width */
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #4a90e2; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  /* Register Link */
+  .register-link {
+    color: #4a90e2; /* Link color */
+    text-decoration: underline; /* Underline text */
+  }
+  
+  .register-link:hover {
+    color: #3c78c1; /* Darker blue on hover */
+  }
+  

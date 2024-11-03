@@ -1,0 +1,65 @@
+/* ModernLogin.css */
+
+/* Login.css */
+
+/* Background Animation */
+.login-animation {
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Form Animation */
+  .login-form-animation {
+    animation: slideUp 1.5s ease-in-out;
+  }
+  
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Bounce Animation for Heading */
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Button Hover Effect */
+  button:hover {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-3px);
+  }
+  
+  /* Additional Styling */
+  .bg-gradient-to-br {
+    background: linear-gradient(to bottom right, #edf2f7, #e2e8f0);
+  }
+  
+  .shadow-2xl {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  
