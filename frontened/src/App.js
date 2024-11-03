@@ -1,12 +1,20 @@
-import { Button } from "antd";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
-    <div className="flex justify-center h-screen items-center flex-col bg-primary">
-
-      <h1>hello</h1>
-      <Button type="dashed">Dashed Button</Button>
-    </div>
+   <div>
+   <BrowserRouter>
+   <Routes>
+   <Route path="/" element={<Home/>}/>
+   <Route path="/login" element={<Login/>}/>
+   <Route path="/register" element={<Register/>}/>
+   </Routes>
+   </BrowserRouter>
+   </div>
   );
 }
 
