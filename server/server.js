@@ -1,6 +1,4 @@
 const express = require("express");
-const mongoose = require('mongoose');
-
 const app = express();
 require("dotenv").config();
 app.use(express.json());
@@ -27,6 +25,5 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 }
-
 
 app.listen(port, () => console.log(`Node JS server listening on port ${port}`));
