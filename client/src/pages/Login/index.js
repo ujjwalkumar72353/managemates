@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Divider from "../../components/Divider";
 import { LoginUser } from "../../apicalls/users";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +10,6 @@ import { getAntdFormInputRules } from "../../utils/helpers";
 function Login() {
   const { buttonLoading } = useSelector((state) => state.loaders);
   const dispatch = useDispatch();
-
   const onFinish = async (values) => {
     try {
       dispatch(SetButtonLoading(true));
@@ -36,99 +34,53 @@ function Login() {
     }
   }, []);
 
-  // Animation Variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
-      {/* Left Section with Animated Text */}
-      <motion.div
-        className="bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col justify-center items-center"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.h1
-          className="text-6xl text-white font-bold"
-          variants={itemVariants}
-        >
-          Manage-Mate
-        </motion.h1>
-        <motion.span
-          className="text-white mt-5 text-lg"
-          variants={itemVariants}
-        >
-          One place to track all your business records
-        </motion.span>
-      </motion.div>
-
-      {/* Right Section with Form */}
-      <motion.div
-        className="flex justify-center items-center bg-gray-100"
-        
-      >
-        <motion.div
-          className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md"
-          
-          variants={containerVariants}
-        >
-          <motion.h1
-            className="text-2xl font-semibold text-gray-700 mb-4"
-            variants={itemVariants}
-          >
-            LOGIN TO YOUR ACCOUNT
-          </motion.h1>
+    <div className="grid grid-cols-2">
+      <div className="bg-primary h-screen flex flex-col justify-center items-center">
+        <div>
+          <h1 className="text-7xl text-white">SHEY-TRACKER</h1>
+          <span className=" text-white mt-5">
+            One place to track all your business records
+          </span>
+        </div>
+      </div>
+      <div className="flex justify-center items-center">
+        <div className="w-[420px]">
+          <h1 className="text-2xl text-gray-700">LOGIN TO YOUR ACCOUNT</h1>
           <Divider />
           <Form layout="vertical" onFinish={onFinish}>
-            <motion.div variants={itemVariants}>
-              <Form.Item label="Email" name="email" rules={getAntdFormInputRules}>
-                <Input className="focus:border-blue-500" />
-              </Form.Item>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={getAntdFormInputRules}
-              >
-                <Input type="password" className="focus:border-blue-500" />
-              </Form.Item>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <Button
-                type="primary"
-                htmlType="submit"
-                block
-                loading={buttonLoading}
-                className="transition-transform transform hover:scale-105"
-              >
-                {buttonLoading ? "Loading" : "Login"}
-              </Button>
-            </motion.div>
-
-            <motion.div
-              className="flex justify-center mt-5"
-              variants={itemVariants}
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={getAntdFormInputRules}
             >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={getAntdFormInputRules}
+            >
+              <Input type="password" />
+            </Form.Item>
+
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={buttonLoading}
+            >
+              {buttonLoading ? "Loading" : "Login"}
+            </Button>
+
+            <div className="flex justify-center mt-5">
               <span>
                 Don't have an account? <Link to="/register">Register</Link>
               </span>
-            </motion.div>
+            </div>
           </Form>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }
