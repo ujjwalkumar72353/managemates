@@ -12,6 +12,7 @@ function Members({ project, reloadData }) {
 
   const dispatch = useDispatch();
   const isOwner = project.owner._id === user._id;
+
   const deleteMember = async (memberId) => {
     try {
       dispatch(SetLoading(true));
@@ -25,10 +26,10 @@ function Members({ project, reloadData }) {
       } else {
         throw new Error(response.message);
       }
-      dispatch(SetLoading(false));
     } catch (error) {
-      dispatch(SetLoading(false));
       message.error(error.message);
+    } finally {
+      dispatch(SetLoading(false));
     }
   };
 
@@ -37,11 +38,13 @@ function Members({ project, reloadData }) {
       title: "First Name",
       dataIndex: "firstName",
       render: (text, record) => record.user.firstName,
+      responsive: ["sm"], // Show on small devices and up
     },
     {
       title: "Last Name",
       dataIndex: "lastName",
       render: (text, record) => record.user.lastName,
+      responsive: ["sm"],
     },
     {
       title: "Email",
@@ -61,48 +64,49 @@ function Members({ project, reloadData }) {
           Remove
         </Button>
       ),
+      responsive: ["sm"],
     },
   ];
 
-  // if not owner, then don't show the action column
+  // Remove "Action" column if the user is not the owner
   if (!isOwner) {
     columns.pop();
   }
 
   return (
-    <div>
-      <div className="flex justify-end">
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
         {isOwner && (
           <Button type="default" onClick={() => setShowMemberForm(true)}>
             Add Member
           </Button>
         )}
+        <div className="w-48">
+          <span>Select Role</span>
+          <select
+            className="w-full p-2 border rounded"
+            onChange={(e) => setRole(e.target.value)}
+            value={role}
+          >
+            <option value="">All</option>
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
+            <option value="owner">Owner</option>
+          </select>
+        </div>
       </div>
-
-      <div
-       className="w-48"
-      >
-        <span>Select Role</span>
-        <select onChange={(e) => setRole(e.target.value)} value={role}>
-          <option value="">All</option>
-          <option value="employee">Employee</option>
-          <option value="admin">Admin</option>
-          <option value="owner">Owner</option>
-        </select>
-      </div>
-
       <Table
         columns={columns}
         dataSource={project.members.filter((member) => {
           if (role === "") {
             return true;
-          } else {
-            return member.role === role;
           }
+          return member.role === role;
         })}
         className="mt-4"
+        pagination={{ pageSize: 5 }}
+        scroll={{ x: true }}
       />
-
       {showMemberForm && (
         <MemberForm
           showMemberForm={showMemberForm}

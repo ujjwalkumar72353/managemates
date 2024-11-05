@@ -13,12 +13,12 @@ function TaskForm({
   task,
   reloadData,
 }) {
-  const [selectedTab = "1", setSelectedTab] = React.useState("1");
+  const [selectedTab, setSelectedTab] = React.useState("1");
   const [email, setEmail] = React.useState("");
   const { user } = useSelector((state) => state.users);
   const formRef = React.useRef(null);
-  const [file = null, setFile] = React.useState(null);
-  const [images = [], setImages] = React.useState(task?.attachments || []);
+  const [file, setFile] = React.useState(null);
+  const [images, setImages] = React.useState(task?.attachments || []);
   const dispatch = useDispatch();
 
   const onFinish = async (values) => {
@@ -172,22 +172,25 @@ function TaskForm({
           </Form>
         </Tabs.TabPane>
         <Tabs.TabPane tab="Attachments" key="2" disabled={!task}>
-          <div className="flex gap-5 mb-5">
-            {images.map((image) => {
-              return (
-                <div className="flex gap-3 p-2 border border-solid rounded border-gray-500 items-end">
-                  <img
-                    src={image}
-                    alt=""
-                    className="w-20 h-20 object-cover mt-2"
-                  />
-                  <i
-                    className="ri-delete-bin-line"
-                    onClick={() => deleteImage(image)}
-                  ></i>
-                </div>
-              );
-            })}
+          <div className="flex flex-wrap gap-5 mb-5">
+            {images.map((image) => (
+              <div
+                key={image}
+                className="flex flex-col gap-2 p-2 border border-solid rounded border-gray-500 items-center"
+              >
+                <img
+                  src={image}
+                  alt=""
+                  className="w-20 h-20 object-cover mt-2"
+                />
+                <Button
+                  type="link"
+                  danger
+                  icon={<i className="ri-delete-bin-line"></i>}
+                  onClick={() => deleteImage(image)}
+                />
+              </div>
+            ))}
           </div>
           <Upload
             beforeUpload={() => false}
