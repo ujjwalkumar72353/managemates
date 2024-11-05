@@ -32,19 +32,21 @@ function Home() {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div>
-      <h1 className="text-primary text-xl">
-        Heyy {user?.firstName} {user?.lastName} , Welcome to Shey-Tracker
+      <h1 className="text-primary text-lg md:text-xl">
+        Hey {user?.firstName} {user?.lastName}, Welcome to Manage-Mate
       </h1>
 
-      <div className="grid grid-cols-4 gap-5 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
         {projects.map((project) => (
           <div
+            key={project._id}
             className="flex flex-col gap-1 border border-solid border-gray-400 rounded-md p-2 cursor-pointer"
             onClick={() => navigate(`/project/${project._id}`)}
           >
-            <h1 className="text-primary text-lg uppercase font-semibold">
+            <h1 className="text-primary text-base md:text-lg uppercase font-semibold">
               {project.name}
             </h1>
 
@@ -78,8 +80,8 @@ function Home() {
 
       {projects.length === 0 && (
         <div className="flex">
-          <h1 className="text-primary text-xl">
-               You have no projects yet
+          <h1 className="text-primary text-lg md:text-xl">
+            You have no projects yet
           </h1>
         </div>
       )}
