@@ -35,7 +35,6 @@ ManageMate is a comprehensive work management platform designed to enhance colla
 - **🗄️ Database**: MongoDB
 - **🔑 Authentication**: JWT (JSON Web Tokens)
 - **⚡ Real-time Updates**: Socket.io (WebSockets)
-- **💾 Caching**: Redis
 
 ## 💡 Why MongoDB?
 
@@ -48,22 +47,17 @@ We chose MongoDB instead of SQL because in real-world applications like ManageMa
 - **Solution**: Implemented JWT-based authentication with role-based middleware in Node.js
 - **Impact**: Improved security and optimized performance by reducing redundant role checks
 
-### 2. ⚡ Optimizing MongoDB Queries for Large Datasets
-- **Challenge**: Handling large datasets efficiently as querying and aggregating data slowed down API responses
-- **Solution**: Used MongoDB indexing, Redis caching, and query optimization techniques (pagination, projection)
-- **Impact**: Reduced API response time by 40-50%, improving overall application speed
-
-### 3. 🔔 Real-Time Task Updates & Notifications
+### 2. 🔔 Real-Time Task Updates & Notifications
 - **Challenge**: Traditional API polling increased server load and provided delayed updates
 - **Solution**: Integrated WebSockets (Socket.io) to push real-time notifications to users
 - **Impact**: Delivered instant updates, improving user experience and reducing server load
 
-### 4. 🛡️ Ensuring Application Security
+### 3. 🛡️ Ensuring Application Security
 - **Challenge**: Preventing unauthorized access and CSRF attacks
 - **Solution**: Implemented JWT authentication, input validation (express-validator), and CORS policies
 - **Impact**: Enhanced security against vulnerabilities like SQL injection and cross-site scripting
 
-### 5. ⚙️ UI Performance & State Management
+### 4. ⚙️ UI Performance & State Management
 - **Challenge**: Unoptimized state management led to unnecessary re-renders, slowing down the UI
 - **Solution**: Used Redux Toolkit for global state management and memoization to optimize re-renders
 - **Impact**: Improved UI responsiveness and reduced API load
