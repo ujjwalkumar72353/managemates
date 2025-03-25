@@ -155,6 +155,4 @@ managemates/
 
 ## 📬 Contact
 
-Ujjwal Kumar - [ujjwalkumar72353@gmail.com](mailto:ujjwalkumar72353@gmail.com)
-
 Project Link: [https://github.com/ujjwalkumar72353/managemates](https://github.com/ujjwalkumar72353/managemates)
