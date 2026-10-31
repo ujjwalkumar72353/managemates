@@ -1,87 +1,45 @@
 const router = require("express").Router();
 const Notification = require("../models/notificationsModel");
 const authMiddleware = require("../middlewares/authMiddleware");
+const { asyncHandler } = require("../utils/http");
 
-// add a notification
-router.post("/add-notification", authMiddleware, async (req, res) => {
-  try {
-    const newNotification = new Notification(req.body);
-    await newNotification.save();
-    res.send({
-      success: true,
-      data: newNotification,
-      message: "Notification added successfully",
-    });
-  } catch (error) {
-    res.send({
-      error: error.message,
-      success: false,
-    });
-  }
-});
+const findForUser = (userId) =>
+  Notification.find({ user: userId }).sort({ createdAt: -1 }).limit(50);
 
 // get all notifications
-router.get("/get-all-notifications", authMiddleware, async (req, res) => {
-  try {
-    const notifications = await Notification.find({
-      user: req.body.userId,
-    }).sort({ createdAt: -1 });
-    res.send({
-      success: true,
-      data: notifications,
-    });
-  } catch (error) {
-    res.send({
-      error: error.message,
-      success: false,
-    });
-  }
-});
+router.get(
+  "/get-all-notifications",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    res.send({ success: true, data: await findForUser(req.userId) });
+  })
+);
 
-// mark notification as read
-router.post("/mark-as-read", authMiddleware, async (req, res) => {
-  try {
+// mark notifications as read
+router.post(
+  "/mark-as-read",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
     await Notification.updateMany(
-      {
-        user: req.body.userId,
-        read: false,
-      },
-      {
-        read: true,
-      }
+      { user: req.userId, read: false },
+      { read: true }
     );
-    const notifications = await Notification.find({
-      user: req.body.userId,
-    }).sort({ createdAt: -1 });
     res.send({
       success: true,
       message: "Notifications marked as read",
-      data: notifications,
+      data: await findForUser(req.userId),
     });
-  } catch (error) {
-    res.send({
-      error: error.message,
-      success: false,
-    });
-  }
-});
+  })
+);
 
 // delete all notifications
-router.delete("/delete-all-notifications", authMiddleware, async (req, res) => {
-  try {
-    await Notification.deleteMany({
-      user: req.body.userId,
-    });
-    res.send({
-      success: true,
-      message: "All notifications deleted",
-    });
-  } catch (error) {
-    res.send({
-      error: error.message,
-      success: false,
-    });
-  }
-});
+router.delete(
+  "/delete-all-notifications",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    await Notification.deleteMany({ user: req.userId });
+    res.send({ success: true, message: "All notifications deleted" });
+  })
+);
 
 module.exports = router;

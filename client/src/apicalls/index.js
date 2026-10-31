@@ -12,6 +12,10 @@ export const apiRequest = async (method, url, payload) => {
     });
     return response.data;
   } catch (error) {
-    return error;
+    return (
+      error.response?.data?.message
+        ? error.response.data
+        : { success: false, message: "Could not reach the server" }
+    );
   }
 };

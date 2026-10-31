@@ -1,17 +1,26 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-          primary : '#2E3840'
-      }
+        canvas: "var(--canvas)",
+        surface: "var(--surface)",
+        raised: "var(--raised)",
+        line: "var(--line)",
+        ink: "var(--ink)",
+        muted: "var(--muted)",
+        accent: "var(--accent)",
+        "accent-soft": "var(--accent-soft)",
+      },
+      boxShadow: {
+        card: "var(--shadow)",
+      },
     },
   },
   plugins: [],
   corePlugins: {
     preflight: false,
   },
-}
+};

@@ -1,23 +1,42 @@
 {
-  "name": "Manage-Mate",
+  "name": "manage-mate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "build": "cd server && npm install  && cd ../client && npm install && npm run build",
-    "start": "node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently -n api,web \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/server.js",
+    "client": "npm run dev --prefix client",
+    "setup": "npm install && npm install --prefix client",
+    "build": "npm install --include=dev --prefix client && npm run build --prefix client",
+    "start": "NODE_ENV=production node server/server.js",
+    "test": "node --test --test-force-exit \"server/test/*.test.js\"",
+    "test:e2e": "node e2e/run.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.35.0",
+    "cloudinary": "^2.11.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
+    "express-rate-limit": "^8.7.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^7.0.3",
-    "multer": "^1.4.5-lts.1",
-    "nodemon": "^2.0.22"
+    "multer": "^2.5.0",
+    "socket.io": "^4.8.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "mongodb-memory-server": "^11.3.0",
+    "nodemon": "^2.0.22",
+    "playwright": "^1.64.1",
+    "socket.io-client": "^4.8.4",
+    "supertest": "^7.3.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
