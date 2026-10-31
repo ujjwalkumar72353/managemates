@@ -5,6 +5,8 @@ const notificationsSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
+      required: true,
+      index: true,
     },
     title: {
       type: String,

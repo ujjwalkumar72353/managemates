@@ -1,15 +1,15 @@
 const jwt = require("jsonwebtoken");
+
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const decryptedToken = jwt.verify(token, process.env.jwt_secret);
-    req.body.userId = decryptedToken.userId;
+    const { userId } = jwt.verify(token, process.env.jwt_secret);
+    req.userId = userId;
     next();
   } catch (error) {
-    
-    res.send({
+    res.status(401).send({
       success: false,
-      message: error.message,
+      message: "Please log in again",
     });
   }
 };

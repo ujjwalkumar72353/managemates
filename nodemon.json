@@ -1,8 +1,17 @@
 {
-    "verbose": true,
-    "ignore": ["./client"],
-    "execMap": {
-      "rb": "ruby",
-      "pde": "processing --sketch={{pwd}} --run"
-    }
-  }
+  "verbose": true,
+  "ignore": [
+    "client",
+    "server/uploads",
+    "server/test",
+    ".data",
+    "e2e"
+  ],
+  "execMap": {
+    "rb": "ruby",
+    "pde": "processing --sketch={{pwd}} --run"
+  },
+  "watch": [
+    "server"
+  ]
+}
